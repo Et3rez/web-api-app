@@ -1,3 +1,7 @@
 html {
     font-family: 'Poppins', sans-serif;
 }
+
+#boxWykresPopulacja{
+    display: none;
+}

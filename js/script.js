@@ -2,6 +2,7 @@
 $("#search-country").submit(function(e){
     e.preventDefault();
 
+    $("#boxWykresPopulacja").css({"display":"none"});
     let country = $("#country").val();
     console.log(country)
 
@@ -17,6 +18,8 @@ $("#search-country").submit(function(e){
             },
             success: function(response){
                 console.log(response);
+                //pokazanie boxa z wykresem
+                $("#boxWykresPopulacja").css({"display":"block"});
             }
         })
     }
