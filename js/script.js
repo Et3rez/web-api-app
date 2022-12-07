@@ -20,6 +20,11 @@ $("#search-country").submit(function(e){
                 console.log(response);
                 //pokazanie boxa z wykresem
                 $("#boxWykresPopulacja").css({"display":"block"});
+
+                // zakres dat i państwo
+                $("#wykresDla").html(response.data.country);
+                $("#lataOd").html(response.data.populationCounts[0].year);
+                $("#lataDo").html(response.data.populationCounts[response.data.populationCounts.length-1].year);
             }
         })
     }

@@ -5,3 +5,7 @@ html {
 #boxWykresPopulacja{
     display: none;
 }
+
+#wykresDla{
+    font-weight: bold;
+}
