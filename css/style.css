@@ -9,3 +9,7 @@ html {
 #wykresDla{
     font-weight: bold;
 }
+
+#wykresCanvasPopulacji{
+    max-height: 300px;
+}
