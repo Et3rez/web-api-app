@@ -32,7 +32,11 @@ $("#search-country").submit(function(e){
 
                 response.data.populationCounts.forEach(rok => {
                     //console.log(`${rok.year} ${rok.value}`);
-                    years.push(rok.year);
+                    let duplicateYear = false;
+                    for (let i = 0; i < years.length; i++){
+                        if(years[i] == rok.year) duplicateYear = true;
+                    }
+                    if(!duplicateYear) years.push(rok.year);
                     populationWithCountry.push(rok.value);
 
                 })
@@ -43,6 +47,7 @@ $("#search-country").submit(function(e){
                 })
 
                 // generowanie wykresu
+                console.log(years);
                 generowanieWykresuPopulacji(years, population);
             },
             error: function() {
