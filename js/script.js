@@ -1,5 +1,6 @@
 let years = [];
 let population = [];
+let colors = ["#1CA4FA","#FF6633", "#FFB399", "#FFFF99", "#00B3E6"];
 
 // wyszukiwanie panstwa
 $("#search-country").submit(function(e){
@@ -22,11 +23,6 @@ $("#search-country").submit(function(e){
                 console.log(response);
                 //pokazanie boxa z wykresem
                 $("#boxWykresPopulacja").css({"display":"block"});
-
-                // zakres dat i państwo
-                $("#wykresDla").html(response.data.country);
-                $("#lataOd").html(response.data.populationCounts[0].year);
-                $("#lataDo").html(response.data.populationCounts[response.data.populationCounts.length-1].year);
 
                 let populationWithCountry = [];
 
@@ -63,17 +59,27 @@ $("#search-country").submit(function(e){
 function generowanieWykresuPopulacji(lata, populacja) {
     $("#wykresPopulacji").html('<canvas id="wykresCanvasPopulacji" width="100%" height="300"></canvas>')
 
+    // zakres dat i państwo
+    
+    $("#lataOd").html(lata[0]);
+    $("#lataDo").html(lata[lata.length-1]);
+
     let data = [];
 
+    $("#wykresDla").html('')
+
     populacja.forEach(pop => {
+        let random = Math.floor((Math.random() * colors.length));
+        $("#wykresDla").append(`${(pop.country).toUpperCase()}, `);
         data.push({
             data: pop.population,
-            label: pop.country
+            label: (pop.country).toUpperCase(),
+            borderColor: colors[random],
+            fill : true
         })
     })
 
     console.log(data);
-
 
     new Chart($("#wykresCanvasPopulacji"), {
         type:"line",
