@@ -21,7 +21,7 @@ $("#search-country").submit(function(e){
                 country: country
             },
             success: function(response){
-                console.log(response);
+                $("#country").val('');
                 //pokazanie boxa z wykresem
                 $("#boxWykresPopulacja").css({"display":"block"});
 
@@ -61,7 +61,6 @@ $("#search-country").submit(function(e){
                 }
 
                 // generowanie wykresu
-                console.log(years);
                 generowanieWykresuPopulacji(years, population);
             },
             error: function() {
@@ -97,7 +96,7 @@ function generowanieWykresuPopulacji(lata, populacja) {
         })
     })
 
-    console.log(data);
+    //console.log(data);
 
     new Chart($("#wykresCanvasPopulacji"), {
         type:"line",
