@@ -6,7 +6,8 @@ let colors = ["#1CA4FA","#FF6633", "#FFB399", "#FFFF99", "#00B3E6"];
 $("#search-country").submit(function(e){
     e.preventDefault();
 
-    $("#boxWykresPopulacja").css({"display":"none"});
+    //$("#boxWykresPopulacja").css({"display":"none"}); ->del
+
     let country = $("#country").val();
     
     if(country.length > 0) {
@@ -36,11 +37,28 @@ $("#search-country").submit(function(e){
                     populationWithCountry.push(rok.value);
 
                 })
-
+                
+                if(population.length < 1){
                 population.push({
                     country: country,
                     population: populationWithCountry
                 })
+                }
+                else{
+                    let countryHasDuplicate = false;
+                    population.forEach(kraj => {
+                        if(kraj.country == country) countryHasDuplicate = true;
+                    })
+                    if(!countryHasDuplicate){
+                        population.push({
+                            country: country,
+                            population: populationWithCountry
+                        })
+                    }
+                    else{
+                        alert('Wpisano już ten kraj do bazy danych.');
+                    }
+                }
 
                 // generowanie wykresu
                 console.log(years);
