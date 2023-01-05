@@ -1,3 +1,19 @@
+// zapytanie o kursy walut
+function apiCoin(token, dni){
+    $.ajax({
+       url: `https://api.coingecko.com/api/v3/coins/${token}/market_chart?vs_currency=usd&days=${dni}&interval=daily`,
+       method: 'GET',
+       success: function(data){
+            console.log(data);
+
+       },
+       error: function(){
+            alert(`Brak danych dla ${token}`);
+       }
+    })
+}
+
+
 // funkcja wyszukania kryptowaluty
 $("#search-crypto").submit(function(e){
     e.preventDefault();
@@ -10,11 +26,7 @@ $("#search-crypto").submit(function(e){
             days = 7;
         }
 
-        // zapytanie o kursy walut
-        // tutaj....
-        console.log(`waluta: ${crypto}`);
-        console.log(`dni: ${days}`);
-
+        apiCoin(crypto, days);
     }
     else{
         alert("Uzupełnij wszystkie pola formularza.");
