@@ -1,3 +1,5 @@
+const now = new Date();
+
 // zapytanie o kursy walut
 function apiCoin(token, dni){
     $.ajax({
@@ -5,6 +7,22 @@ function apiCoin(token, dni){
        method: 'GET',
        success: function(data){
             console.log(data);
+
+            // oś x
+            let time = [];
+
+            // oś x - daty dni kursów waluty
+            for(let i = dni-1; i >=0; i--){
+                let day = new Date(now);
+                day.setDate(now.getDate()-i);
+                let d = day.getDate();
+                if(d<10) d="0"+d;
+                let m = day.getMonth()+1;
+                if(m<10) m="0"+m;
+                let y = day.getFullYear();
+                time.push(`${d}-${m}-${y}`);
+            }
+            console.log(time)
 
        },
        error: function(){
