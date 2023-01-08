@@ -10,6 +10,11 @@ function apiCoin(token, dni){
 
             // oś x
             let time = [];
+            // oś y
+            let coin = [{
+                'coin': token
+            }];
+            let rates = [];
 
             // oś x - daty dni kursów waluty
             for(let i = dni-1; i >=0; i--){
@@ -20,10 +25,13 @@ function apiCoin(token, dni){
                 let m = day.getMonth()+1;
                 if(m<10) m="0"+m;
                 let y = day.getFullYear();
-                time.push(`${d}-${m}-${y}`);
-            }
-            console.log(time)
 
+                time.push(`${d}-${m}-${y}`);
+                rates.push(parseFloat(data.prices[i][1]).toFixed(4));
+            }
+
+            console.log(`czas (oś x):`, time)
+            console.log(`kursy (oś y): `, rates);
        },
        error: function(){
             alert(`Brak danych dla ${token}`);
