@@ -32,6 +32,8 @@ function apiCoin(token, dni){
 
             console.log(`czas (oś x):`, time)
             console.log(`kursy (oś y): `, rates);
+
+            $("#searchedCrypto").html(`${token.toUpperCase()} (wykres dla ${dni}) dni`)
        },
        error: function(){
             alert(`Brak danych dla ${token}`);
