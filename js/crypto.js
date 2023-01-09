@@ -73,12 +73,13 @@ $("#search-crypto-days-chart").submit(function(e){
     noweDni = $("#days-chart").val();
 
     if(noweDni > 0 && noweDni < 361){
-        $("#searchedCrypto").html(`${currentCryptoChart.toUpperCase()} (wykres dla ${noweDni}) dni`);    
+        //$("#searchedCrypto").html(`${currentCryptoChart.toUpperCase()} (wykres dla ${noweDni}) dni`);
+        apiCoin(currentCryptoChart, noweDni)
+
     }
     else{
         alert('Podaj prawidłową liczbę')
     }
-    
     
     console.log(noweDni);
 
