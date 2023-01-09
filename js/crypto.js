@@ -1,4 +1,5 @@
 const now = new Date();
+let currentCryptoChart = '';
 
 // zapytanie o kursy walut
 function apiCoin(token, dni){
@@ -6,6 +7,7 @@ function apiCoin(token, dni){
        url: `https://api.coingecko.com/api/v3/coins/${token}/market_chart?vs_currency=usd&days=${dni}&interval=daily`,
        method: 'GET',
        success: function(data){
+            $("#cryptoBoxSearch").css({"display":"flex"});
             console.log(data);
 
             // oś x
@@ -33,7 +35,8 @@ function apiCoin(token, dni){
             console.log(`czas (oś x):`, time)
             console.log(`kursy (oś y): `, rates);
 
-            $("#searchedCrypto").html(`${token.toUpperCase()} (wykres dla ${dni}) dni`)
+            $("#searchedCrypto").html(`${token.toUpperCase()} (wykres dla ${dni}) dni`);
+            currentCryptoChart = token;
        },
        error: function(){
             alert(`Brak danych dla ${token}`);
@@ -61,4 +64,22 @@ $("#search-crypto").submit(function(e){
     }
 
     console.log(`${crypto} ${days}`);
+})
+
+$("#search-crypto-days-chart").submit(function(e){
+    e.preventDefault();
+
+    let noweDni;
+    noweDni = $("#days-chart").val();
+
+    if(noweDni > 0 && noweDni < 361){
+        $("#searchedCrypto").html(`${currentCryptoChart.toUpperCase()} (wykres dla ${noweDni}) dni`);    
+    }
+    else{
+        alert('Podaj prawidłową liczbę')
+    }
+    
+    
+    console.log(noweDni);
+
 })

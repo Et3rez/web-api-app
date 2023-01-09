@@ -13,3 +13,7 @@ html {
 #wykresCanvasPopulacji{
     max-height: 300px;
 }
+
+#cryptoBoxSearch{
+    display: none;
+}
