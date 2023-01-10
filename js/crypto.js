@@ -1,5 +1,6 @@
 const now = new Date();
 let currentCryptoChart = '';
+let colors = ["#1CA4FA","#FF6633", "#FFB399", "#FFFF99", "#00B3E6"];
 
 // zapytanie o kursy walut
 function apiCoin(token, dni){
@@ -7,9 +8,6 @@ function apiCoin(token, dni){
        url: `https://api.coingecko.com/api/v3/coins/${token}/market_chart?vs_currency=usd&days=${dni}&interval=daily`,
        method: 'GET',
        success: function(data){
-            $("#cryptoBoxSearch").css({"display":"flex"});
-            console.log(data);
-
             // oś x
             let time = [];
             // oś y
@@ -29,21 +27,19 @@ function apiCoin(token, dni){
                 let y = day.getFullYear();
 
                 time.push(`${d}-${m}-${y}`);
-                rates.push(parseFloat(data.prices[i][1]).toFixed(4));
+                rates.push(parseFloat((data.prices[i][1]).toFixed(4)));
             }
 
-            console.log(`czas (oś x):`, time)
-            console.log(`kursy (oś y): `, rates);
+            coin.push(rates);
 
-            $("#searchedCrypto").html(`${token.toUpperCase()} (wykres dla ${dni}) dni`);
             currentCryptoChart = token;
+            refreshChartCrypto(time, coin, dni);
        },
        error: function(){
             alert(`Brak danych dla ${token}`);
        }
     })
 }
-
 
 // funkcja wyszukania kryptowaluty
 $("#search-crypto").submit(function(e){
@@ -64,7 +60,7 @@ $("#search-crypto").submit(function(e){
     }
 
     console.log(`${crypto} ${days}`);
-})
+});
 
 $("#search-crypto-days-chart").submit(function(e){
     e.preventDefault();
@@ -83,4 +79,30 @@ $("#search-crypto-days-chart").submit(function(e){
     
     console.log(noweDni);
 
-})
+});
+
+function refreshChartCrypto(time, crypto, dayNum){
+    $("#cryptoBoxSearch").css({"display":"flex"});
+    $("#chartCanvasCrypto").html('')
+    $("#chartCanvasCrypto").html('<canvas id="line-chart-krypto" width="100%" height="30"></canvas>');
+    $("#searchedCrypto").html(`${(crypto[0].coin).toUpperCase()} (wykres dla ${dayNum}) dni`);
+
+    let random = Math.floor((Math.random() * colors.length));
+
+    let data = [{
+        data: crypto[1],
+        label: (crypto[0].coin).toUpperCase(),
+        borderColor: colors[random],
+        fill: true
+    }]
+
+    //console.log(data);
+
+    new Chart($("#line-chart-krypto"), {
+        type: 'line',
+        data: {
+            labels: time,
+            datasets: data
+        }
+    })
+}
