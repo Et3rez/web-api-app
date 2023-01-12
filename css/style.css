@@ -17,3 +17,7 @@ html {
 #cryptoBoxSearch{
     display: none;
 }
+
+#line-chart-krypto{
+    max-height: 300px;
+}

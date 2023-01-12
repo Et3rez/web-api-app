@@ -84,7 +84,7 @@ $("#search-crypto-days-chart").submit(function(e){
 function refreshChartCrypto(time, crypto, dayNum){
     $("#cryptoBoxSearch").css({"display":"flex"});
     $("#chartCanvasCrypto").html('')
-    $("#chartCanvasCrypto").html('<canvas id="line-chart-krypto" width="100%" height="30"></canvas>');
+    $("#chartCanvasCrypto").html('<canvas id="line-chart-krypto" width="100%" height="300"></canvas>');
     $("#searchedCrypto").html(`${(crypto[0].coin).toUpperCase()} (wykres dla ${dayNum}) dni`);
 
     let random = Math.floor((Math.random() * colors.length));
