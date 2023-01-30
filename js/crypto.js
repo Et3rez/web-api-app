@@ -81,6 +81,7 @@ $("#search-crypto-days-chart").submit(function(e){
 
 });
 
+
 function refreshChartCrypto(time, crypto, dayNum){
     $("#cryptoBoxSearch").css({"display":"flex"});
     $("#chartCanvasCrypto").html('')
@@ -106,3 +107,17 @@ function refreshChartCrypto(time, crypto, dayNum){
         }
     })
 }
+
+// zmiana liczby wierszy w rankingu
+$("#search-crypto-days").submit(function(e){
+    e.preventDefault();
+
+    let liczbaRekordow = $("#days-ranking").val();
+
+    if(liczbaRekordow > 0 && liczbaRekordow <= 100){
+        console.log(`Liczba wierszy do wyświetlenia: ${liczbaRekordow}`);
+    }
+    else{
+        alert('Wprowadź poprawną liczbę (między 1 a 100)');
+    }
+});
