@@ -115,9 +115,34 @@ $("#search-crypto-days").submit(function(e){
     let liczbaRekordow = $("#days-ranking").val();
 
     if(liczbaRekordow > 0 && liczbaRekordow <= 100){
-        console.log(`Liczba wierszy do wyświetlenia: ${liczbaRekordow}`);
+        //console.log(`Liczba wierszy do wyświetlenia: ${liczbaRekordow}`);
+        generateTable(liczbaRekordow)
     }
     else{
         alert('Wprowadź poprawną liczbę (między 1 a 100)');
     }
 });
+
+// generowanie tabelki z rankingiem
+function generateTable(num){
+    $.ajax({
+        url: 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd',
+        method: 'GET',
+        success: function(response){
+            response.forEach((crypto, index) => {
+                if(index < num){
+                    console.log(`krypto nr ${index}`)
+                    console.log(crypto)
+                }
+            })
+        },
+        error: function(){
+            alert(`Wystąpił błąd podczas ładowania rankingu kryptowalut.`)
+        }
+    })
+}
+
+$(document).ready(function(){
+    let limit = 5;
+    generateTable(limit)
+})
