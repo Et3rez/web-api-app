@@ -125,14 +125,41 @@ $("#search-crypto-days").submit(function(e){
 
 // generowanie tabelki z rankingiem
 function generateTable(num){
+    // generowanie pierwszego wiersza tabelki
+    $("#cryptoTableBox").html(`
+        <table class="table col-12">
+            <thead class="table-dark">
+                <th class="text-center">#</>
+                <th class="text-center">Nazwa</th>
+                <th class="text-center">Kurs (w USD)</th>
+                <th class="text-center">Zmiana 24h</th>
+                <th class="text-center">ATH</th>
+                <th class="text-center">Zobacz wykres</th>
+            </thead>
+            <tbody id="cryptoRankingTable">
+
+            </tbody>
+        </table>
+    `)
     $.ajax({
         url: 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd',
         method: 'GET',
         success: function(response){
             response.forEach((crypto, index) => {
                 if(index < num){
-                    console.log(`krypto nr ${index}`)
-                    console.log(crypto)
+                    // generowanie wierszy tabelki
+                    $('#cryptoRankingTable').append(`
+                        <tr>
+                            <td class="text-center">${crypto.market_cap_rank}</td>
+                            <td class="text-center">${crypto.name}</td>
+                            <td class="text-center">${crypto.current_price}</td>
+                            <td class="text-center">${crypto.price_change_percentage_24h}%</td>
+                            <td class="text-center">${crypto.ath}</td>
+                            <td class="text-center"><i class="fa-solid fa-magnifying-glass"></i></td>
+                        </tr>
+                    
+                    `)
+
                 }
             })
         },
