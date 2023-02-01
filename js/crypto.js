@@ -132,7 +132,7 @@ function generateTable(num){
                 <th class="text-center">#</>
                 <th class="text-center">Nazwa</th>
                 <th class="text-center">Kurs (w USD)</th>
-                <th class="text-center">Zmiana 24h</th>
+                <th class="text-center">Zmiana 24h (w USD)</th>
                 <th class="text-center">ATH</th>
                 <th class="text-center">Zobacz wykres</th>
             </thead>
@@ -147,19 +147,23 @@ function generateTable(num){
         success: function(response){
             response.forEach((crypto, index) => {
                 if(index < num){
-                    // generowanie wierszy tabelki
+                    let priceChange24H = '';
+                    let priceChangeATH = '';
+
+                    if(crypto.price_change_percentage_24h > 0) priceChange24H = `<span class="text-success">(${(crypto.price_change_percentage_24h).toFixed(2)}%)</span>`;
+                    else priceChange24H =`<span class="text-danger">(${(crypto.price_change_percentage_24h).toFixed(2)}%)</span>`;
+
+
                     $('#cryptoRankingTable').append(`
                         <tr>
                             <td class="text-center">${crypto.market_cap_rank}</td>
                             <td class="text-center">${crypto.name}</td>
                             <td class="text-center">${crypto.current_price}</td>
-                            <td class="text-center">${crypto.price_change_percentage_24h}%</td>
+                            <td class="text-center">${(crypto.price_change_24h).toFixed(2)} ${priceChange24H}</td>
                             <td class="text-center">${crypto.ath}</td>
                             <td class="text-center"><i class="fa-solid fa-magnifying-glass"></i></td>
                         </tr>
-                    
                     `)
-
                 }
             })
         },
