@@ -161,7 +161,7 @@ function generateTable(num){
                             <td class="text-center">${crypto.market_cap_rank}</td>
                             <td class="text-left">
                                 <img class="crypto-img" src="${crypto.image}" />
-                                ${crypto.name} (${crypto.symbol})                         
+                                ${crypto.name} (${(crypto.symbol).toUpperCase()})                         
                             </td>
                             <td class="text-center">${(crypto.current_price).toFixed(4)}</td>
                             <td class="text-center">${(crypto.price_change_24h).toFixed(4)} ${priceChange24H}</td>
