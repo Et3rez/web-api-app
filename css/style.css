@@ -29,3 +29,18 @@ html {
 table{
     border-radius: 10px;
 }
+
+#cryptoRanking{
+    margin-bottom: 25px;
+}
+
+.checkChartIcon{
+    opacity: .5;
+    transition: .2s;
+    cursor: pointer
+}
+
+.checkChartIcon:hover{
+    opacity: 1;
+    transition: .2s;
+}

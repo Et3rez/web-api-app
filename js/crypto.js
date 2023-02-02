@@ -123,6 +123,11 @@ $("#search-crypto-days").submit(function(e){
     }
 });
 
+function checkChartFor(cryptoId){
+    //console.log('sprawdx wykres', cryptoId);
+    apiCoin(cryptoId, 30)
+}
+
 // generowanie tabelki z rankingiem
 function generateTable(num){
     // generowanie pierwszego wiersza tabelki
@@ -166,7 +171,7 @@ function generateTable(num){
                             <td class="text-center">${(crypto.current_price).toFixed(4)}</td>
                             <td class="text-center">${(crypto.price_change_24h).toFixed(4)} ${priceChange24H}</td>
                             <td class="text-center">${(crypto.ath).toFixed(2)} ${priceChangeATH}</td>
-                            <td class="text-center"><i class="fa-solid fa-magnifying-glass"></i></td>
+                            <td class="text-center"><i class="fa-solid fa-magnifying-glass checkChartIcon" onClick='checkChartFor("${crypto.id}")'></i></td>
                         </tr>
                     `)
                 }
@@ -179,6 +184,6 @@ function generateTable(num){
 }
 
 $(document).ready(function(){
-    let limit = 5;
+    let limit = 10;
     generateTable(limit)
 })
