@@ -21,3 +21,11 @@ html {
 #line-chart-krypto{
     max-height: 300px;
 }
+
+.crypto-img{
+    max-height: 20px;
+}
+
+table{
+    border-radius: 10px;
+}

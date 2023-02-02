@@ -153,14 +153,19 @@ function generateTable(num){
                     if(crypto.price_change_percentage_24h > 0) priceChange24H = `<span class="text-success">(${(crypto.price_change_percentage_24h).toFixed(2)}%)</span>`;
                     else priceChange24H =`<span class="text-danger">(${(crypto.price_change_percentage_24h).toFixed(2)}%)</span>`;
 
+                    if(crypto.ath_change_percentage > 0) priceChangeATH = `<span class="text-success">(${(crypto.ath_change_percentage).toFixed(2)}%)</span>`;
+                    else priceChangeATH = `<span class="text-danger">(${(crypto.ath_change_percentage).toFixed(2)}%)</span>`
 
                     $('#cryptoRankingTable').append(`
                         <tr>
                             <td class="text-center">${crypto.market_cap_rank}</td>
-                            <td class="text-center">${crypto.name}</td>
-                            <td class="text-center">${crypto.current_price}</td>
-                            <td class="text-center">${(crypto.price_change_24h).toFixed(2)} ${priceChange24H}</td>
-                            <td class="text-center">${crypto.ath}</td>
+                            <td class="text-left">
+                                <img class="crypto-img" src="${crypto.image}" />
+                                ${crypto.name}                         
+                            </td>
+                            <td class="text-center">${(crypto.current_price).toFixed(4)}</td>
+                            <td class="text-center">${(crypto.price_change_24h).toFixed(4)} ${priceChange24H}</td>
+                            <td class="text-center">${(crypto.ath).toFixed(2)} ${priceChangeATH}</td>
                             <td class="text-center"><i class="fa-solid fa-magnifying-glass"></i></td>
                         </tr>
                     `)
